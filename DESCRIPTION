@@ -1,11 +1,21 @@
 Package: rCPNT
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Perform both Bayesian and Frequentist cNMA 
+Version: 1.0.0
+Authors@R: 
+    person(given = "Chun Yin",
+           family = "Poon",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: Collection of tools and codes for easier cNMA analyses.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    dplyr,
+    magrittr,
+    MCMCvis,
+    netmeta,
+    rjags,
+    tidyr
+RoxygenNote: 7.2.1
