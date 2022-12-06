@@ -1,33 +1,29 @@
-#' Reformat the data for Frequentist cNMA
+#' Reformat the data for Frequentist NMA
 #'
 #' @param df Dataframe to reformat
-#' @param range Columns to reformat (components only)
 #' @param maxna Maximum number of arms
 #' @param ns Number of studies
 #'
-#' @return Dataframe for Frequentist cNMA
+#' @return Dataframe for Frequentist NMA
 #' @export
 #'
 #' @examples data(example)
-#' reformat_f(example, c1:c4, 3, 5)
-reformat_f <- function(df, range, maxna, ns){
-  df_comp <- df %>%
-    mutate(across({{range}}, ~ case_when(. == 1 ~ cur_column()), .names = "new_{col}")) %>%
-    unite(arm, starts_with("new"), na.rm = TRUE, sep = " + ")
-  df_comp[df_comp == ""] <- NA
+#' reformat_nma(example, 3, 5)
+reformat_nma <- function(df, maxna, ns){
+
+  df[df == ""] <- NA
 
   #pairwise
-  studlab <- df_comp$StudyN %>%
-    unique
+  studlab <- df$StudyN %>% unique
 
-  output <- df_comp %>%
-    select(arm) %>%
+  output <- df %>%
+    select(Treatment) %>%
     t() %>%
     unlist() %>%
     matrix(byrow = TRUE, nrow = {{ns}}) %>%
     data.frame(studlab, .)
 
-  output <- df_comp %>%
+  output <- df %>%
     select(n, mean, SD) %>%
     t() %>%
     unlist() %>%

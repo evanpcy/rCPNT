@@ -4,10 +4,12 @@
 \alias{reformat_b}
 \title{Reformat the data for bayesian cNMA}
 \usage{
-reformat_b(df, maxna, ns)
+reformat_b(df, range, maxna, ns)
 }
 \arguments{
 \item{df}{Dataframe to reformat}
+
+\item{range}{Columns with the values and components}
 
 \item{maxna}{Maximum number of arms}
 
@@ -18,4 +20,8 @@ List of variables for Bayesian cNMA
 }
 \description{
 Reformat the data for bayesian cNMA
+}
+\examples{
+data(example)
+reformat_b(example, n:c4, 3, 5)
 }

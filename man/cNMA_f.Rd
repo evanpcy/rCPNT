@@ -23,3 +23,7 @@ Results of Frequentist cNMA
 \description{
 Perform Frequentist cNMA using netmeta
 }
+\examples{
+data(example)
+cNMA_f(example, c1:c4, 3, 5)
+}

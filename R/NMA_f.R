@@ -1,18 +1,16 @@
-#' Perform Frequentist cNMA using netmeta
+#' Perform Frequentist NMA using netmeta
 #'
 #' @param df Dataframe for analysis
-#' @param range Columns with the components
 #' @param maxna Maximum number of arms
 #' @param ns Number of studies
-#' @param chkident Boolean for details.chkident
 #'
-#' @return Results of Frequentist cNMA
+#' @return Results of Frequentist NMA
 #' @export
 #'
 #' @examples data(example)
-#' cNMA_f(example, c1:c4, 3, 5)
-cNMA_f <- function(df, range, maxna, ns, chkident = FALSE){
-  formatted <- reformat_f(df, {{range}}, maxna, ns)
+#' NMA_f(example, 3, 5)
+NMA_f <- function(df, maxna, ns){
+  formatted <- reformat_nma(df, maxna, ns)
 
   target <- c("t", "n", "mean", "sd")
   listed <- lapply(target, function(x) as.list(select(formatted, starts_with(x))))
@@ -24,20 +22,16 @@ cNMA_f <- function(df, range, maxna, ns, chkident = FALSE){
                                  data = formatted,
                                  studlab = formatted$studlab)
 
-  pairwised %$%
-    netconnection(treat1, treat2, studlab) %>% print
-
-
-  trts <- formatted %>%
-    select(starts_with("t")) %>%
+  trts <- df %>%
+    select(Treatment) %>%
     unlist %>%
     .[!is.na(.)] %>%
     unique
 
-  result <- pairwised %$%
-    discomb(TE, seTE, treat1, treat2, studlab,
-            sm = "MD", comb.random = TRUE, seq = trts, details.chkident = {{chkident}})
+  result <- netmeta(TE, seTE, treat1, treat2, studlab,
+          data = pairwised, reference.group = "Therapy A",
+          sm = "MD", comb.fixed = FALSE, comb.random = TRUE,
+          seq = trts, nchar.trts = 8)
 
-  print(result$C.matrix)
   return(result)
 }

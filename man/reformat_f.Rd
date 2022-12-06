@@ -2,7 +2,7 @@
 % Please edit documentation in R/reformat_f.R
 \name{reformat_f}
 \alias{reformat_f}
-\title{Reformat the data for frequentist cNMA}
+\title{Reformat the data for Frequentist cNMA}
 \usage{
 reformat_f(df, range, maxna, ns)
 }
@@ -19,5 +19,9 @@ reformat_f(df, range, maxna, ns)
 Dataframe for Frequentist cNMA
 }
 \description{
-Reformat the data for frequentist cNMA
+Reformat the data for Frequentist cNMA
+}
+\examples{
+data(example)
+reformat_f(example, c1:c4, 3, 5)
 }

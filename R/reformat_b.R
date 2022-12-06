@@ -1,12 +1,18 @@
 #' Reformat the data for bayesian cNMA
 #'
 #' @param df Dataframe to reformat
+#' @param range Columns with the values and components
 #' @param maxna Maximum number of arms
 #' @param ns Number of studies
 #'
 #' @return List of variables for Bayesian cNMA
 #' @export
-reformat_b <- function(df, maxna, ns) {
+#'
+#' @examples data(example)
+#' reformat_b(example, n:c4, 3, 5)
+reformat_b <- function(df, range, maxna, ns) {
+  df %<>%
+    select({{range}})
   variables <- list()
   for (i in 1:ncol(df)) {
     variables[[i]] <- df[, i]

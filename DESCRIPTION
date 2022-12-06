@@ -19,3 +19,5 @@ Imports:
     rjags,
     tidyr
 RoxygenNote: 7.2.1
+Depends: 
+    R (>= 2.10)

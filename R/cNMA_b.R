@@ -10,7 +10,7 @@
 #' @return Results of Bayesian cNMA
 #' @export
 cNMA_b <- function(df, range, maxna, ns, model, nc){
-  parameters <- reformat_b(select(df, {{range}}), maxna, ns)
+  parameters <- reformat_b(df, {{range}}, maxna, ns)
 
   names(parameters) <- c("n", "y", "sd", "se", paste0("c", 1:nc))
 
